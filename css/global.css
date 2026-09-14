@@ -1817,3 +1817,504 @@ footer{
     }
 
 }
+/* =====================================================
+   FINAL MOBILE HEADER
+===================================================== */
+
+@media(max-width:950px){
+
+    header{
+
+        width:100%;
+
+    }
+
+
+    .nav{
+
+        width:92%;
+
+        min-height:68px;
+
+        gap:8px;
+
+    }
+
+
+    /* -----------------------------
+       LOGO
+    ----------------------------- */
+
+    .logo{
+
+        min-width:0;
+
+        max-width:
+            calc(100% - 48px);
+
+        flex:1 1 auto;
+
+        gap:8px;
+
+        font-size:17px;
+
+        white-space:nowrap;
+
+        overflow:hidden;
+
+    }
+
+
+    .logo-mark{
+
+        width:37px;
+
+        height:37px;
+
+        min-width:37px;
+
+        flex:0 0 37px;
+
+    }
+
+
+    .logo > div:last-child{
+
+        min-width:0;
+
+        overflow:hidden;
+
+    }
+
+
+    .logo span{
+
+        white-space:nowrap;
+
+    }
+
+
+    .logo small{
+
+        font-size:6px;
+
+        letter-spacing:1.6px;
+
+        white-space:nowrap;
+
+    }
+
+
+    /* -----------------------------
+       HAMBURGER
+    ----------------------------- */
+
+    .menu-btn{
+
+        display:grid !important;
+
+        place-items:center;
+
+        width:40px;
+
+        height:40px;
+
+        min-width:40px;
+
+        flex:0 0 40px;
+
+        padding:0;
+
+        margin:0;
+
+        border:0;
+
+        background:transparent;
+
+        color:var(--text);
+
+        font-size:25px;
+
+        line-height:1;
+
+        cursor:pointer;
+
+    }
+
+
+    /* -----------------------------
+       MOBILE DRAWER
+    ----------------------------- */
+
+    .nav-links{
+
+        position:absolute;
+
+        left:4%;
+
+        top:68px;
+
+        width:92%;
+
+        max-height:
+            calc(100vh - 82px);
+
+        overflow-y:auto;
+
+        padding:12px;
+
+        background:var(--surface);
+
+        border:1px solid var(--border);
+
+        border-radius:18px;
+
+        box-shadow:var(--shadow);
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:4px;
+
+        opacity:0;
+
+        visibility:hidden;
+
+        pointer-events:none;
+
+        transform:
+            translateY(-8px);
+
+        transition:
+            opacity .25s ease,
+            transform .3s var(--ease),
+            visibility .25s ease;
+
+        z-index:1000;
+
+    }
+
+
+    .nav-links.active{
+
+        opacity:1;
+
+        visibility:visible;
+
+        pointer-events:auto;
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    .nav-item{
+
+        width:100%;
+
+    }
+
+
+    .nav-main-link{
+
+        width:100% !important;
+
+        min-height:44px;
+
+        padding:
+            10px 7px !important;
+
+        display:flex !important;
+
+        align-items:center;
+
+        justify-content:space-between;
+
+        font-size:14px !important;
+
+        color:var(--text) !important;
+
+    }
+
+
+    .nav-chevron{
+
+        margin-left:auto;
+
+        font-size:13px;
+
+    }
+
+
+    /* -----------------------------
+       MOBILE DROPDOWN
+    ----------------------------- */
+
+    .nav-dropdown{
+
+        position:static;
+
+        width:100%;
+
+        margin:0 0 4px;
+
+        padding:5px;
+
+        display:none;
+
+        transform:none;
+
+        opacity:1;
+
+        visibility:visible;
+
+        pointer-events:auto;
+
+        background:var(--surface-2);
+
+        border-radius:13px;
+
+        box-shadow:none;
+
+    }
+
+
+    .nav-dropdown::before,
+    .nav-dropdown::after{
+
+        display:none;
+
+    }
+
+
+    .nav-item.open .nav-dropdown{
+
+        display:block;
+
+        animation:
+            mobileDropdown
+            .22s
+            var(--ease);
+
+    }
+
+
+    .nav-dropdown a{
+
+        min-height:42px;
+
+        padding:7px !important;
+
+    }
+
+
+    .nav-dropdown strong{
+
+        font-size:10px;
+
+    }
+
+
+    .nav-dropdown small{
+
+        font-size:8px;
+
+    }
+
+
+    /* -----------------------------
+       THEME
+    ----------------------------- */
+
+    .theme-toggle{
+
+        align-self:center;
+
+        margin:6px 4px;
+
+    }
+
+
+    /* -----------------------------
+       CTA
+    ----------------------------- */
+
+    .nav-cta{
+
+        width:100%;
+
+        text-align:center;
+
+        margin-top:2px;
+
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .nav{
+
+        width:94%;
+
+        gap:6px;
+
+    }
+
+
+    .logo{
+
+        font-size:15px;
+
+        gap:7px;
+
+        max-width:
+            calc(100% - 44px);
+
+    }
+
+
+    .logo-mark{
+
+        width:35px;
+
+        height:35px;
+
+        min-width:35px;
+
+        flex-basis:35px;
+
+        border-radius:10px;
+
+    }
+
+
+    .logo small{
+
+        font-size:5px;
+
+        letter-spacing:1.25px;
+
+    }
+
+
+    .menu-btn{
+
+        width:38px;
+
+        height:38px;
+
+        min-width:38px;
+
+        flex-basis:38px;
+
+        font-size:23px;
+
+    }
+
+
+    .nav-links{
+
+        left:3%;
+
+        width:94%;
+
+        top:68px;
+
+    }
+
+}
+/* =====================================================
+   MOBILE MENU — FINAL POSITION / OVERFLOW FIX
+===================================================== */
+
+@media(max-width:950px){
+
+    /*
+       Prevent the navigation drawer from ever
+       translating horizontally.
+    */
+
+    .nav-links{
+
+        left:4% !important;
+
+        right:auto !important;
+
+        width:92% !important;
+
+        transform:
+            translate3d(0,-8px,0) !important;
+
+        overflow-x:hidden !important;
+
+    }
+
+
+    .nav-links.active{
+
+        transform:
+            translate3d(0,0,0) !important;
+
+    }
+
+
+    /*
+       Keep every navigation item inside
+       the drawer.
+    */
+
+    .nav-item,
+    .nav-main-link,
+    .nav-dropdown,
+    .nav-dropdown a{
+
+        max-width:100%;
+
+        overflow-x:hidden;
+
+    }
+
+
+    /*
+       Prevent text/content from creating a
+       horizontal layout.
+    */
+
+    .nav-main-link,
+    .nav-dropdown a{
+
+        min-width:0;
+
+    }
+
+
+    .nav-dropdown a > span:last-child{
+
+        min-width:0;
+
+        max-width:100%;
+
+        overflow:hidden;
+
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .nav-links{
+
+        left:3% !important;
+
+        width:94% !important;
+
+    }
+
+}
