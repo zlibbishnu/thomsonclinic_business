@@ -138,7 +138,7 @@ function initializeTheme() {
 
 
 /* =====================================================
-   MOBILE NAVIGATION
+   MOBILE NAVIGATION + DROPDOWNS
 ===================================================== */
 
 function initializeMobileMenu() {
@@ -157,47 +157,294 @@ function initializeMobileMenu() {
     if (!menuBtn || !navLinks) return;
 
 
+    /*
+       Main mobile menu
+    */
+
     menuBtn.addEventListener(
         "click",
         () => {
 
-            navLinks.classList.toggle(
-                "active"
-            );
+            const active =
+                navLinks.classList.toggle(
+                    "active"
+                );
 
 
             menuBtn.textContent =
-                navLinks.classList.contains(
-                    "active"
-                )
+                active
                     ? "×"
                     : "☰";
+
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                active
+                    ? "true"
+                    : "false"
+            );
 
         }
     );
 
 
-    /* Close menu after clicking link */
+    /*
+       Mobile dropdowns
+    */
 
-    navLinks
-        .querySelectorAll("a")
-        .forEach(link => {
+    const navItems =
+        navLinks.querySelectorAll(
+            ".nav-item"
+        );
 
-            link.addEventListener(
+
+    navItems.forEach(
+        item => {
+
+            const mainLink =
+                item.querySelector(
+                    ".nav-main-link"
+                );
+
+            const dropdown =
+                item.querySelector(
+                    ".nav-dropdown"
+                );
+
+
+            if (
+                !mainLink ||
+                !dropdown
+            ) {
+
+                return;
+
+            }
+
+
+            mainLink.addEventListener(
                 "click",
-                () => {
+                e => {
 
-                    navLinks.classList.remove(
-                        "active"
-                    );
+                    /*
+                       Desktop:
+                       normal link behaviour.
 
-                    menuBtn.textContent =
-                        "☰";
+                       Mobile:
+                       first tap opens dropdown.
+                    */
+
+                    if (
+                        window.innerWidth > 900
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const isOpen =
+                        item.classList.contains(
+                            "open"
+                        );
+
+
+                    /*
+                       If submenu exists and
+                       isn't open, open it.
+                    */
+
+                    if (!isOpen) {
+
+                        e.preventDefault();
+
+
+                        navItems.forEach(
+                            other => {
+
+                                other.classList.remove(
+                                    "open"
+                                );
+
+                            }
+                        );
+
+
+                        item.classList.add(
+                            "open"
+                        );
+
+                    }
 
                 }
             );
 
-        });
+
+            /*
+               Dropdown links close menu
+            */
+
+            dropdown
+                .querySelectorAll("a")
+                .forEach(
+                    link => {
+
+                        link.addEventListener(
+                            "click",
+                            () => {
+
+                                navItems.forEach(
+                                    other => {
+
+                                        other.classList.remove(
+                                            "open"
+                                        );
+
+                                    }
+                                );
+
+
+                                navLinks.classList.remove(
+                                    "active"
+                                );
+
+
+                                menuBtn.textContent =
+                                    "☰";
+
+
+                                menuBtn.setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+
+    /*
+       Desktop / outside click
+    */
+
+    document.addEventListener(
+        "click",
+        e => {
+
+            if (
+                !navLinks.contains(e.target) &&
+                !menuBtn.contains(e.target)
+            ) {
+
+                navItems.forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "open"
+                        );
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+       Escape key
+    */
+
+    document.addEventListener(
+        "keydown",
+        e => {
+
+            if (
+                e.key !== "Escape"
+            ) {
+
+                return;
+
+            }
+
+
+            navItems.forEach(
+                item => {
+
+                    item.classList.remove(
+                        "open"
+                    );
+
+                }
+            );
+
+
+            navLinks.classList.remove(
+                "active"
+            );
+
+
+            menuBtn.textContent =
+                "☰";
+
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+    );
+
+
+    /*
+       Close mobile menu when
+       resizing back to desktop.
+    */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            if (
+                window.innerWidth > 900
+            ) {
+
+                navLinks.classList.remove(
+                    "active"
+                );
+
+
+                navItems.forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "open"
+                        );
+
+                    }
+                );
+
+
+                menuBtn.textContent =
+                    "☰";
+
+
+                menuBtn.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+    );
 
 }
 
@@ -307,7 +554,7 @@ function initializeReveal() {
 
 
 /* =====================================================
-   SMOOTH SCROLL
+   SMART PAGE + SECTION NAVIGATION
 ===================================================== */
 
 function initializeSmoothScroll() {
@@ -318,9 +565,23 @@ function initializeSmoothScroll() {
         );
 
 
+    const headerOffset =
+        () => {
+
+            return header
+                ? header.offsetHeight + 12
+                : 12;
+
+        };
+
+
+    /*
+       Same-page anchor navigation
+    */
+
     document
         .querySelectorAll(
-            'a[href^="#"]'
+            'a[href*="#"]'
         )
         .forEach(anchor => {
 
@@ -328,16 +589,43 @@ function initializeSmoothScroll() {
                 "click",
                 function (e) {
 
-                    const id =
+                    const href =
                         this.getAttribute(
                             "href"
                         );
 
 
                     if (
-                        id === "#" ||
-                        id === ""
+                        !href ||
+                        href === "#"
                     ) {
+
+                        return;
+
+                    }
+
+
+                    const url =
+                        new URL(
+                            href,
+                            window.location.href
+                        );
+
+
+                    /*
+                       Only intercept same-page
+                       links.
+                    */
+
+                    const samePage =
+                        url.origin ===
+                            window.location.origin
+                        &&
+                        url.pathname ===
+                            window.location.pathname;
+
+
+                    if (!samePage) {
 
                         return;
 
@@ -346,20 +634,124 @@ function initializeSmoothScroll() {
 
                     const target =
                         document.querySelector(
-                            id
+                            url.hash
                         );
 
 
-                    if (target) {
+                    if (!target) {
 
-                        e.preventDefault();
+                        return;
+
+                    }
 
 
-                        const offset =
-                            header
-                                ? header.offsetHeight + 12
-                                : 12;
+                    e.preventDefault();
 
+
+                    const position =
+                        target
+                            .getBoundingClientRect()
+                            .top
+                        +
+                        window.scrollY
+                        -
+                        headerOffset();
+
+
+                    window.scrollTo({
+
+                        top:position,
+
+                        behavior:"smooth"
+
+                    });
+
+
+                    /*
+                       Update URL without
+                       causing a jump.
+                    */
+
+                    history.pushState(
+                        null,
+                        "",
+                        url.hash
+                    );
+
+
+                    /*
+                       Close mobile navigation.
+                    */
+
+                    const navLinks =
+                        document.getElementById(
+                            "navLinks"
+                        );
+
+                    const menuBtn =
+                        document.getElementById(
+                            "menuBtn"
+                        );
+
+
+                    if (
+                        navLinks &&
+                        navLinks.classList.contains(
+                            "active"
+                        )
+                    ) {
+
+                        navLinks.classList.remove(
+                            "active"
+                        );
+
+
+                        if (menuBtn) {
+
+                            menuBtn.textContent =
+                                "☰";
+
+                            menuBtn.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    /*
+       If arriving from another page with
+       #section, compensate for fixed header.
+    */
+
+    if (window.location.hash) {
+
+        window.addEventListener(
+            "load",
+            () => {
+
+                const target =
+                    document.querySelector(
+                        window.location.hash
+                    );
+
+
+                if (!target) {
+
+                    return;
+
+                }
+
+
+                setTimeout(
+                    () => {
 
                         const position =
                             target
@@ -368,23 +760,25 @@ function initializeSmoothScroll() {
                             +
                             window.scrollY
                             -
-                            offset;
+                            headerOffset();
 
 
                         window.scrollTo({
 
-                            top: position,
+                            top:position,
 
-                            behavior: "smooth"
+                            behavior:"smooth"
 
                         });
 
-                    }
+                    },
+                    120
+                );
 
-                }
-            );
+            }
+        );
 
-        });
+    }
 
 }
 
@@ -531,7 +925,76 @@ function initializeCursorGlow() {
 
 }
 
+/* =====================================================
+   ACTIVE PAGE NAVIGATION
+===================================================== */
 
+function initializeActiveNavigation() {
+
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop()
+            .toLowerCase();
+
+
+    const navLinks =
+        document.querySelectorAll(
+            ".nav-main-link"
+        );
+
+
+    navLinks.forEach(
+        link => {
+
+            const href =
+                link.getAttribute(
+                    "href"
+                );
+
+
+            if (!href) return;
+
+
+            const linkPage =
+                href
+                    .split("/")
+                    .pop()
+                    .split("#")[0]
+                    .toLowerCase();
+
+
+            if (
+                (
+                    currentPage === "" ||
+                    currentPage === "index.html"
+                )
+                &&
+                (
+                    linkPage === "" ||
+                    linkPage === "index.html"
+                )
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+            else if (
+                linkPage === currentPage
+            ) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 /* =====================================================
    START
 ===================================================== */
