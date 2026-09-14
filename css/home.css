@@ -1,3 +1,5 @@
+/* =====================================================
+   HERO
 ===================================================== */
 
 .hero{
@@ -213,6 +215,89 @@
 
 .btn{
 
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:13px 20px;
+
+    border-radius:100px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    border:1px solid transparent;
+
+    transition:
+        transform .3s var(--ease),
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.btn:hover{
+
+    transform:translateY(-3px);
+}
+
+.btn-primary{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-2)
+        );
+
+    box-shadow:
+        0 12px 28px
+        rgba(8,127,196,.20);
+}
+
+.btn-primary:hover{
+
+    box-shadow:
+        0 18px 35px
+        rgba(8,127,196,.27);
+}
+
+.btn-outline{
+
+    color:var(--text);
+
+    background:var(--surface);
+
+    border-color:var(--border);
+
+    box-shadow:var(--shadow-small);
+}
+
+.btn-whatsapp{
+
+    color:#08785f;
+
+    background:#e7faf4;
+
+    border-color:#c7eee2;
+}
+
+body.dark .btn-whatsapp{
+
+    color:#66dfbf;
+
+    background:#102e2a;
+
+    border-color:#1d4d44;
+}
+
 
 /* TRUST */
 
@@ -251,7 +336,6 @@
 
     background:var(--teal);
 }
-
 
 /* =====================================================
    HERO VISUAL
@@ -511,7 +595,6 @@
     border:1px solid var(--border);
 }
 
-
 /* =====================================================
    FLOATING CARDS
 ===================================================== */
@@ -622,7 +705,6 @@
 
     margin-top:2px;
 }
-
 
 /* =====================================================
    ECOSYSTEM
@@ -773,7 +855,6 @@
 
     font-weight:800;
 }
-
 
 /* =====================================================
    PRICING
@@ -993,7 +1074,6 @@
 
     width:100%;
 }
-
 
 /* =====================================================
    PORTAL
@@ -1292,7 +1372,6 @@
     font-weight:700;
 }
 
-
 /* =====================================================
    SOCIAL
 ===================================================== */
@@ -1380,7 +1459,6 @@
 
     color:var(--text-soft);
 }
-
 
 /* =====================================================
    ECOSYSTEM MAP
@@ -1523,7 +1601,6 @@
     color:var(--text-soft);
 }
 
-
 /* =====================================================
    PROCESS
 ===================================================== */
@@ -1630,7 +1707,6 @@
     line-height:1.6;
 }
 
-
 /* =====================================================
    WHY US
 ===================================================== */
@@ -1706,7 +1782,6 @@
 
     line-height:1.6;
 }
-
 
 /* =====================================================
    FAQ
@@ -1790,7 +1865,6 @@
 
     line-height:1.7;
 }
-
 
 /* =====================================================
    CTA
@@ -1918,58 +1992,4 @@
 
     border-color:
         rgba(255,255,255,.20);
-}
-
-
-/* =====================================================
-   FOOTER
-
-
-
-/* =====================================================
-   HOME PAGE RESPONSIVE
-===================================================== */
-
-@media(max-width:1050px){
-    .hero-grid{grid-template-columns:1fr;text-align:center;gap:40px;}
-    .hero-copy{margin:auto auto 30px;}
-    .hero-actions{justify-content:center;}
-    .hero-trust{justify-content:center;}
-    .hero-visual{min-height:470px;}
-    .portal-grid{grid-template-columns:1fr;}
-    .social-grid{grid-template-columns:repeat(2,1fr);}
-    .process-grid{grid-template-columns:repeat(2,1fr);gap:40px;}
-    .process-grid::before{display:none;}
-}
-
-@media(max-width:850px){
-    .eco-grid{grid-template-columns:1fr;}
-    .plan-grid{grid-template-columns:1fr;}
-    .plans-head{display:block;}
-    .plans-note{margin-top:10px;}
-    .why-grid{grid-template-columns:1fr;}
-    .map-grid{grid-template-columns:1fr;}
-    .map-box.center{transform:none;}
-    .map-box.center:hover{transform:translateY(-5px);}
-    .cta-content{flex-direction:column;align-items:flex-start;}
-}
-
-@media(max-width:600px){
-    .section{padding:75px 0;}
-    .hero{padding-top:125px;}
-    .hero h1{font-size:40px;letter-spacing:-1.1px;}
-    .hero-copy{font-size:15px;}
-    .hero-visual{min-height:380px;}
-    .device{animation:none;transform:none;}
-    .device:hover{transform:translateY(-5px);}
-    .device-screen{min-height:290px;padding:20px;}
-    .mock-title{font-size:24px;}
-    .mock-links{display:none;}
-    .float-card{transform:scale(.82);}
-    .float-portal{left:-12px;top:20px;}
-    .float-social{right:-12px;bottom:15px;}
-    .social-grid{grid-template-columns:1fr;}
-    .process-grid{grid-template-columns:1fr;}
-    .ecosystem-map{padding:25px;}
-    .cta-box{padding:35px 25px;border-radius:23px;}
 }

@@ -1,4 +1,6 @@
-LIGHT + DARK DESIGN SYSTEM
+/* =====================================================
+   THOMSON CLINIC — DOCTORS
+   LIGHT + DARK DESIGN SYSTEM
 ===================================================== */
 
 :root{
@@ -33,7 +35,6 @@ LIGHT + DARK DESIGN SYSTEM
 
 }
 
-
 /* =====================================================
    DARK MODE
 ===================================================== */
@@ -64,7 +65,6 @@ body.dark{
         rgba(24,183,196,.13);
 
 }
-
 
 /* =====================================================
    RESET
@@ -179,7 +179,6 @@ button{
         rgba(24,183,196,.10);
 }
 
-
 /* =====================================================
    TYPOGRAPHY
 ===================================================== */
@@ -224,7 +223,6 @@ h3{
 
     color:var(--text-soft);
 }
-
 
 /* =====================================================
    HEADER
@@ -275,7 +273,6 @@ header.scrolled{
 
     gap:25px;
 }
-
 
 /* =====================================================
    LOGO
@@ -349,7 +346,6 @@ header.scrolled{
     margin-top:1px;
 }
 
-
 /* =====================================================
    NAVIGATION
 ===================================================== */
@@ -400,7 +396,6 @@ header.scrolled{
 
     width:100%;
 }
-
 
 /* =====================================================
    THEME TOGGLE
@@ -517,67 +512,8 @@ body.dark .theme-toggle::before{
     cursor:pointer;
 }
 
-
 /* =====================================================
-   HERO
-
-
-
-/* =====================================================
-   SHARED BUTTONS
-===================================================== */
-
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    padding:13px 20px;
-    border-radius:100px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    border:1px solid transparent;
-    transition:
-        transform .3s var(--ease),
-        box-shadow .3s ease,
-        background .3s ease;
-}
-
-.btn:hover{
-    transform:translateY(-3px);
-}
-
-.btn-primary{
-    color:white;
-    background:linear-gradient(135deg,var(--primary),var(--primary-2));
-    box-shadow:0 12px 28px rgba(8,127,196,.20);
-}
-
-.btn-primary:hover{
-    box-shadow:0 18px 35px rgba(8,127,196,.27);
-}
-
-.btn-outline{
-    color:var(--text);
-    background:var(--surface);
-    border-color:var(--border);
-    box-shadow:var(--shadow-small);
-}
-
-.btn-whatsapp{
-    color:#08785f;
-    background:#e7faf4;
-    border-color:#c7eee2;
-}
-
-body.dark .btn-whatsapp{
-    color:#66dfbf;
-    background:#102e2a;
-    border-color:#1d4d44;
-}
-
-
+   FOOTER
 ===================================================== */
 
 footer{
@@ -661,7 +597,6 @@ footer{
 
     font-size:9px;
 }
-
 
 /* =====================================================
    FLOATING WHATSAPP
@@ -753,7 +688,6 @@ footer{
     transform:translateX(0);
 }
 
-
 /* =====================================================
    REVEAL
 ===================================================== */
@@ -776,17 +710,56 @@ footer{
     transform:translateY(0);
 }
 
-
 /* =====================================================
    RESPONSIVE
-
-
-
-/* =====================================================
-   GLOBAL RESPONSIVE
 ===================================================== */
 
+@media(max-width:1050px){
+
+    /* HOME */
+    .hero-grid{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:40px;
+    }
+
+    .hero-copy{
+        margin:auto auto 30px;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .hero-trust{
+        justify-content:center;
+    }
+
+    .hero-visual{
+        min-height:470px;
+    }
+
+    .portal-grid{
+        grid-template-columns:1fr;
+    }
+
+    .social-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .process-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:40px;
+    }
+
+    .process-grid::before{
+        display:none;
+    }
+}
+
 @media(max-width:850px){
+
+    /* GLOBAL */
     .nav-links{
         position:absolute;
         left:4%;
@@ -805,41 +778,171 @@ footer{
         transform:translateY(-10px);
         transition:.3s;
     }
+
     .nav-links.active{
         opacity:1;
         pointer-events:auto;
         transform:translateY(0);
     }
-    .nav-links a{padding:5px;}
-    .nav-cta{text-align:center;}
-    .menu-btn{display:block;}
+
+    .nav-links a{
+        padding:5px;
+    }
+
+    .nav-cta{
+        text-align:center;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    /* HOME */
+    .eco-grid{
+        grid-template-columns:1fr;
+    }
+
+    .plan-grid{
+        grid-template-columns:1fr;
+    }
+
+    .plans-head{
+        display:block;
+    }
+
+    .plans-note{
+        margin-top:10px;
+    }
+
+    .why-grid{
+        grid-template-columns:1fr;
+    }
+
+    .map-grid{
+        grid-template-columns:1fr;
+    }
+
+    .map-box.center{
+        transform:none;
+    }
+
+    .map-box.center:hover{
+        transform:translateY(-5px);
+    }
+
+    .cta-content{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 }
 
 @media(max-width:600px){
-    .footer-grid{flex-direction:column;}
-    .footer-bottom{flex-direction:column;gap:7px;}
+
+    /* GLOBAL */
+    .footer-grid{
+        flex-direction:column;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        gap:7px;
+    }
+
     .whatsapp-float{
         right:15px;
         bottom:15px;
         width:52px;
         height:52px;
     }
+
+    /* HOME */
+    .section{
+        padding:75px 0;
+    }
+
+    .hero{
+        padding-top:125px;
+    }
+
+    .hero h1{
+        font-size:40px;
+        letter-spacing:-1.1px;
+    }
+
+    .hero-copy{
+        font-size:15px;
+    }
+
+    .hero-visual{
+        min-height:380px;
+    }
+
+    .device{
+        animation:none;
+        transform:none;
+    }
+
+    .device:hover{
+        transform:translateY(-5px);
+    }
+
+    .device-screen{
+        min-height:290px;
+        padding:20px;
+    }
+
+    .mock-title{
+        font-size:24px;
+    }
+
+    .mock-links{
+        display:none;
+    }
+
+    .float-card{
+        transform:scale(.82);
+    }
+
+    .float-portal{
+        left:-12px;
+        top:20px;
+    }
+
+    .float-social{
+        right:-12px;
+        bottom:15px;
+    }
+
+    .social-grid{
+        grid-template-columns:1fr;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr;
+    }
+
+    .ecosystem-map{
+        padding:25px;
+    }
+
+    .cta-box{
+        padding:35px 25px;
+        border-radius:23px;
+    }
 }
 
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
 
 @media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
     *::after{
-
         animation-duration:.01ms !important;
-
         animation-iteration-count:1 !important;
-
         scroll-behavior:auto !important;
-
         transition-duration:.01ms !important;
     }
-
 }
