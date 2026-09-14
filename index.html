@@ -3543,23 +3543,25 @@ footer{
 }
 
 
-/* Desktop fix: Google Search + Social Media panels side-by-side */
-@media (min-width: 901px){
-  .visibility-grid{
+
+/* =====================================================
+   VISIBILITY PANELS — DESKTOP SIDE-BY-SIDE
+===================================================== */
+.visibility-dashboard{
     display:grid !important;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
-    gap:28px !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:20px !important;
     align-items:stretch !important;
-  }
-  .visibility-grid > *{
-    min-width:0 !important;
-    width:auto !important;
-  }
 }
-@media (max-width: 900px){
-  .visibility-grid{
-    grid-template-columns:1fr !important;
-  }
+
+.visibility-dashboard > .visibility-panel{
+    min-width:0 !important;
+}
+
+@media (max-width:900px){
+    .visibility-dashboard{
+        grid-template-columns:1fr !important;
+    }
 }
 
 </style>
@@ -4059,8 +4061,6 @@ footer{
 
 </div>
 
-</div>
-
 
 
 
@@ -4123,6 +4123,8 @@ footer{
 <span class="social-spark spark-1"></span>
 <span class="social-spark spark-2"></span>
 <span class="social-spark spark-3"></span>
+
+</div>
 
 </div>
 
