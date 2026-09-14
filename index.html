@@ -3542,6 +3542,26 @@ footer{
 
 }
 
+
+/* Desktop fix: Google Search + Social Media panels side-by-side */
+@media (min-width: 901px){
+  .visibility-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:28px !important;
+    align-items:stretch !important;
+  }
+  .visibility-grid > *{
+    min-width:0 !important;
+    width:auto !important;
+  }
+}
+@media (max-width: 900px){
+  .visibility-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
 </style>
 </head>
 
